@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site com Problemas de Contraste</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .header {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #aaaaaa; /* Cinza claro - PROBLEMA DE CONTRASTE */
+            margin: 0;
+        }
+        
+        .promo-banner {
+            background-color: #f8d7da;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .promo-text {
+            color: #8c4046; /* Vermelho escuro sobre rosa claro - CONTRASTE INSUFICIENTE */
+            font-size: 18px;
+        }
+        
+        .content {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .main-content {
+            flex: 2;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .main-content h2 {
+            color: #666666; /* Cinza médio - PROBLEMA DE CONTRASTE */
+        }
+        
+        .sidebar {
+            flex: 1;
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .sidebar h3 {
+            color: #6c757d; /* Cinza escuro sobre cinza claro - CONTRASTE INSUFICIENTE */
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #d1ecf1; /* Azul claro */
+            color: #0c5460; /* Azul escuro */
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #343a40; /* Preto azulado */
+            color: #495057; /* Cinza escuro sobre preto - CONTRASTE INSUFICIENTE */
+            border-radius: 5px;
+        }
+        
+        .required-field {
+            color: #ff9999; /* Vermelho claro - PROBLEMA DE CONTRASTE */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Bem-vindo ao Nosso Site</h1>
+    </div>
+    
+    <div class="promo-banner">
+        <p class="promo-text">Oferta especial por tempo limitado! Não perca nossa promoção exclusiva.</p>
+    </div>
+    
+    <div class="content">
+        <div class="main-content">
+            <h2>Artigo Principal</h2>
+            <p>Este é o conteúdo principal da página. Aqui temos informações importantes que todos os visitantes devem conseguir ler.</p>
+            <p>Infelizmente, o contraste inadequado torna difícil para muitas pessoas lerem este texto.</p>
+            
+            <form>
+                <label for="email">Email <span class="required-field">*</span></label>
+                <input type="email" id="email" name="email" required>
+                
+                <button type="submit" class="button">Inscrever-se</button>
+            </form>
+        </div>
+        
+        <div class="sidebar">
+            <h3>Links Rápidos</h3>
+            <ul>
+                <li><a href="#">Sobre nós</a></li>
+                <li><a href="#">Serviços</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2023 Site Exemplo. Todos os direitos reservados.</p>
+        <p>Entre em contato: contato@siteexemplo.com.br</p>
+    </div>
+</body>
+</html>
