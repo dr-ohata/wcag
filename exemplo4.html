@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problemas de Mensagens de Erro em Formulários</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .intro {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ffc107;
+        }
+        
+        .example-section {
+            margin: 40px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        
+        .example-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .problem-section {
+            background-color: #ffe6e6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #ff5252;
+        }
+        
+        .solution-section {
+            background-color: #e6ffe6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .bad-form input:invalid, .bad-form select:invalid {
+            border: 1px solid #dc3545;
+        }
+        
+        .good-form input:invalid, .good-form select:invalid {
+            border: 2px solid #dc3545;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: #0069d9;
+        }
+        
+        .button:focus {
+            outline: 3px solid #80bdff;
+            outline-offset: 2px;
+        }
+        
+        .form-feedback {
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        
+        .form-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .code-example {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Consolas', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Problemas de Mensagens de Erro em Formulários</h1>
+            <p class="intro">Esta página demonstra problemas comuns relacionados à identificação e correção de erros em formulários.</p>
+        </header>
+        
+        <div class="warning">
+            <strong>Importante:</strong> Tente enviar os formulários abaixo para ver as diferentes formas de tratar erros.
+        </div>
+        
+        <div class="example-section">
+            <h2 class="example-title">1. Mensagens de Erro Genéricas ou Inexistente</h2>
+            
+            <div class="problem-section">
+                <h3>Problema: Mensagem de Erro Genérica ou Inexistente</h3>
+                <p>Mensagens de erro genéricas como "Corrija os erros abaixo" não ajudam o usuário a entender o que precisa ser corrigido.</p>
+                
+                <form class="bad-form" id="bad-form-1">
+                    <div class="form-group">
+                        <label for="bad-name">Nome completo</label>
+                        <input type="text" id="bad-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bad-email">E-mail</label>
+                        <input type="email" id="bad-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bad-password">Senha (mínimo 8 caracteres)</label>
+                        <input type="password" id="bad-password" name="password" minlength="8" required>
+                    </div>
+                    
+                    <button type="submit" class="button">Cadastrar</button>
+                    
+                    <div id="bad-form-error" class="form-feedback form-error hidden">
+                        Corrija os erros no formulário acima.
+                    </div>
+                </form>
+                
+                <div class="code-example">
+                    &lt;div class="error"&gt;Corrija os erros no formulário acima.&lt;/div&gt;
+                </div>
+            </div>
+            
+            <div class="solution-section">
+                <h3>Solução: Mensagens de Erro Específicas e Contextuais</h3>
+                <p>As mensagens de erro devem identificar claramente o campo problemático e explicar como corrigir o erro.</p>
+                
+                <form class="good-form" id="good-form-1">
+                    <div class="form-group">
+                        <label for="good-name">Nome completo</label>
+                        <input type="text" id="good-name" name="name" required aria-describedby="name-error">
+                        <span id="name-error" class="error-message hidden">Por favor, informe seu nome completo.</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="good-email">E-mail</label>
+                        <input type="email" id="good-email" name="email" required aria-describedby="email-error">
+                        <span id="email-error" class="error-message hidden">Por favor, informe um endereço de e-mail válido.</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="good-password">Senha (mínimo 8 caracteres)</label>
+                        <input type="password" id="good-password" name="password" minlength="8" required aria-describedby="password-error">
+                        <span id="password-error" class="error-message hidden">A senha deve ter pelo menos 8 caracteres.</span>
+                    </div>
+                    
+                    <button type="submit" class="button">Cadastrar</button>
+                </form>
+                
+                <div class="code-example">
+                    &lt;input type="text" id="name" aria-describedby="name-error" required&gt;<br>
+                    &lt;span id="name-error" class="error-message"&gt;Por favor, informe seu nome completo.&lt;/span&gt;
+                </div>
+            </div>
+        </div>
+        
+        <div class="example-section">
+            <h2 class="example-title">2. Identificação Visual Inadequada dos Campos com Erro</h2>
+            
+            <div class="two-column">
+                <div class="problem-section">
+                    <h3>Problema: Apenas Cor para Indicar Erro</h3>
+                    <p>Usar apenas cor (como borda vermelha) para identificar campos com erro não é suficiente para usuários daltônicos ou com baixa visão.</p>
+                    
+                    <form class="bad-form" id="bad-form-2">
+                        <div class="form-group">
+                            <label for="bad-phone">Telefone</label>
+                            <input type="tel" id="bad-phone" name="phone" pattern="[0-9]{10,11}" required>
+                            <span class="error-message hidden">Formato inválido</span>
+                        </div>
+                        
+                        <button type="submit" class="button">Enviar</button>
+                    </form>
+                    
+                    <div class="code-example">
+                        /* Apenas mudança de cor */<br>
+                        input:invalid {<br>
+                        &nbsp;&nbsp;border-color: #dc3545;<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="solution-section">
+                    <h3>Solução: Múltiplos Indicadores de Erro</h3>
+                    <p>Além da cor, use ícones, texto e padrões visuais para identificar campos com erro.</p>
+                    
+                    <form class="good-form" id="good-form-2">
+                        <div class="form-group">
+                            <label for="good-phone">Telefone</label>
+                            <input type="tel" id="good-phone" name="phone" pattern="[0-9]{10,11}" required 
+                                   aria-describedby="phone-error" aria-invalid="false">
+                            <span id="phone-error" class="error-message hidden">Informe um telefone válido com DDD (10 ou 11 dígitos).</span>
+                        </div>
+                        
+                        <button type="submit" class="button">Enviar</button>
+                    </form>
+                    
+                    <div class="code-example">
+                        /* Múltiplos indicadores */<br>
+                        input[aria-invalid="true"] {<br>
+                        &nbsp;&nbsp;border: 2px solid #dc3545;<br>
+                        &nbsp;&nbsp;background-image: url('icon-error.svg');<br>
+                        &nbsp;&nbsp;background-position: right 10px center;<br>
+                        &nbsp;&nbsp;background-repeat: no-repeat;<br>
+                        &nbsp;&nbsp;padding-right: 40px;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="example-section">
+            <h2 class="example-title">3. Mensagens de Erro com Linguagem Técnica</h2>
+            
+            <div class="two-column">
+                <div class="problem-section">
+                    <h3>Problema: Mensagens Técnicas ou de Sistema</h3>
+                    <p>Mensagens de erro com termos técnicos ou códigos de sistema não ajudam o usuário a entender o problema.</p>
+                    
+                    <form class="bad-form" id="bad-form-3">
+                        <div class="form-group">
+                            <label for="bad-username">Nome de usuário</label>
+                            <input type="text" id="bad-username" name="username" pattern="[a-zA-Z0-9_]+" required>
+                            <span class="error-message hidden">ValidationError: Input does not match pattern /[a-zA-Z0-9_]+/</span>
+                        </div>
+                        
+                        <button type="submit" class="button">Criar conta</button>
+                    </form>
+                    
+                    <div class="code-example">
+                        &lt;span class="error"&gt;ValidationError: Input does not match pattern /[a-zA-Z0-9_]+/&lt;/span&gt;
+                    </div>
+                </div>
+                
+                <div class="solution-section">
+                    <h3>Solução: Linguagem Clara e Ação Corretiva</h3>
+                    <p>Use linguagem simples e direta, explicando o problema e como corrigi-lo.</p>
+                    
+                    <form class="good-form" id="good-form-3">
+                        <div class="form-group">
+                            <label for="good-username">Nome de usuário</label>
+                            <input type="text" id="good-username" name="username" pattern="[a-zA-Z0-9_]+" required
+                                   aria-describedby="username-error" aria-invalid="false">
+                            <span id="username-error" class="error-message hidden">Use apenas letras, números e underline (_).</span>
+                        </div>
+                        
+                        <button type="submit" class="button">Criar conta</button>
+                    </form>
+                    
+                    <div class="code-example">
+                        &lt;span id="username-error" class="error-message"&gt;<br>
+                        &nbsp;&nbsp;Use apenas letras, números e underline (_).<br>
+                        &lt;/span&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="example-section">
+            <h2 class="example-title">4. Posicionamento Inadequado das Mensagens de Erro</h2>
+            
+            <div class="problem-section">
+                <h3>Problema: Mensagens de Erro Longe do Campo</h3>
+                <p>Mensagens de erro agrupadas no topo ou final do formulário dificultam a associação com o campo problemático.</p>
+                
+                <form class="bad-form" id="bad-form-4">
+                    <div id="bad-errors" class="form-feedback form-error hidden">
+                        <p>Foram encontrados os seguintes erros:</p>
+                        <ul id="bad-errors-list"></ul>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bad-birthdate">Data de nascimento</label>
+                        <input type="date" id="bad-birthdate" name="birthdate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bad-terms">
+                            <input type="checkbox" id="bad-terms" name="terms" required>
+                            Aceito os termos de uso
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="button">Continuar</button>
+                </form>
+            </div>
+            
+            <div class="solution-section">
+                <h3>Solução: Mensagens Próximas aos Campos com Erro</h3>
+                <p>Posicione as mensagens de erro próximas aos campos problemáticos, preferencialmente antes do campo para leitores de tela.</p>
+                
+                <form class="good-form" id="good-form-4">
+                    <div class="form-group">
+                        <label for="good-birthdate">Data de nascimento</label>
+                        <input type="date" id="good-birthdate" name="birthdate" required
+                               aria-describedby="birthdate-error" aria-invalid="false">
+                        <span id="birthdate-error" class="error-message hidden">Por favor, informe sua data de nascimento.</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="good-terms">
+                            <input type="checkbox" id="good-terms" name="terms" required
+                                   aria-describedby="terms-error" aria-invalid="false">
+                            Aceito os termos de uso
+                        </label>
+                        <span id="terms-error" class="error-message hidden">Você deve aceitar os termos para continuar.</span>
+                    </div>
+                    
+                    <button type="submit" class="button">Continuar</button>
+                </form>
+                
+                <div class="code-example">
+                    &lt;div class="form-group"&gt;<br>
+                    &nbsp;&nbsp;&lt;label for="birthdate"&gt;Data de nascimento&lt;/label&gt;<br>
+                    &nbsp;&nbsp;&lt;span id="birthdate-error" class="error-message"&gt;...&lt;/span&gt;<br>
+                    &nbsp;&nbsp;&lt;input type="date" id="birthdate" aria-describedby="birthdate-error"&gt;<br>
+                    &lt;/div&gt;
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Este exemplo demonstra problemas comuns de acessibilidade relacionados à identificação e correção de erros em formulários.</p>
+            <p>Lembre-se: mensagens de erro claras e específicas ajudam todos os usuários a preencher formulários corretamente.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Script para demonstrar os comportamentos dos formulários
+        document.addEventListener('DOMContentLoaded', function() {
+            // Formulário problemático 1
+            document.getElementById('bad-form-1').addEventListener('submit', function(e) {
+                e.preventDefault();
+                let hasError = false;
+                
+                // Verificar campos
+                const name = document.getElementById('bad-name');
+                const email = document.getElementById('bad-email');
+                const password = document.getElementById('bad-password');
+                
+                if (!name.value) hasError = true;
+                if (!email.value || !email.validity.valid) hasError = true;
+                if (!password.value || password.value.length < 8) hasError = true;
+                
+                if (hasError) {
+                    document.getElementById('bad-form-error').classList.remove('hidden');
+                } else {
+                    alert('Formulário enviado com sucesso! (exemplo)');
+                }
+            });
+            
+            // Formulário acessível 1
+            document.getElementById('good-form-1').addEventListener('submit', function(e) {
+                e.preventDefault();
+                let hasError = false;
+                
+                // Verificar campos e mostrar erros individuais
+                const name = document.getElementById('good-name');
+                const nameError = document.getElementById('name-error');
+                
+                if (!name.value) {
+                    nameError.classList.remove('hidden');
+                    name.setAttribute('aria-invalid', 'true');
+                    hasError = true;
+                } else {
+                    nameError.classList.add('hidden');
+                    name.setAttribute('aria-invalid', 'false');
+                }
+                
+                const email = document.getElementById('good-email');
+                const emailError = document.getElementById('email-error');
+                
+                if (!email.value || !email.validity.valid) {
+                    emailError.classList.remove('hidden');
+                    email.setAttribute('aria-invalid', 'true');
+                    hasError = true;
+                } else {
+                    emailError.classList.add('hidden');
+                    email.setAttribute('aria-invalid', 'false');
+                }
+                
+                const password = document.getElementById('good-password');
+                const passwordError = document.getElementById('password-error');
+                
+                if (!password.value || password.value.length < 8) {
+                    passwordError.classList.remove('hidden');
+                    password.setAttribute('aria-invalid', 'true');
+                    hasError = true;
+                } else {
+                    passwordError.classList.add('hidden');
+                    password.setAttribute('aria-invalid', 'false');
+                }
+                
+                if (!hasError) {
+                    alert('Formulário enviado com sucesso! (exemplo)');
+                }
+            });
+            
+            // Adicionar scripts semelhantes para os outros formulários...
+        });
+    </script>
+</body>
+</html>

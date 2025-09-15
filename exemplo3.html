@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problemas de Foco ao Navegar por Teclado</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .intro {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ffc107;
+        }
+        
+        .example-section {
+            margin: 40px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        
+        .example-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .problem-section {
+            background-color: #ffe6e6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #ff5252;
+        }
+        
+        .solution-section {
+            background-color: #e6ffe6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #4caf50;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px 5px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .bad-button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+        }
+        
+        .bad-button:hover {
+            background-color: #5a6268;
+        }
+        
+        .good-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+        
+        .good-button:hover, .good-button:focus {
+            background-color: #0069d9;
+            outline: 3px solid #80bdff;
+            outline-offset: 2px;
+        }
+        
+        .no-focus:focus {
+            outline: none;
+        }
+        
+        .custom-focus:focus {
+            outline: 2px solid #ff8c00;
+            outline-offset: 3px;
+            box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.3);
+        }
+        
+        .nav-menu {
+            display: flex;
+            background-color: #343a40;
+            padding: 0;
+            margin: 20px 0;
+            border-radius: 4px;
+            list-style-type: none;
+        }
+        
+        .nav-item {
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .nav-item:hover {
+            background-color: #495057;
+        }
+        
+        .nav-item:focus {
+            background-color: #007bff;
+            outline: 2px solid #80bdff;
+            outline-offset: -2px;
+        }
+        
+        .tab-container {
+            margin: 20px 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .tab-button {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab-button:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .tab-button.active {
+            border-bottom: 3px solid #007bff;
+            font-weight: bold;
+        }
+        
+        .tab-button:focus {
+            outline: 2px solid #007bff;
+            outline-offset: 2px;
+        }
+        
+        .tab-content {
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .code-example {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Consolas', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #7f8c8d;
+        }
+        
+        kbd {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: monospace;
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Problemas de Foco Visível ao Navegar por Teclado</h1>
+            <p class="intro">Esta página demonstra problemas comuns relacionados ao indicador de foco durante a navegação por teclado.</p>
+        </header>
+        
+        <div class="warning">
+            <strong>Importante:</strong> Experimente navegar por esta página usando apenas o teclado (tecla <kbd>Tab</kbd> para avançar, <kbd>Shift</kbd>+<kbd>Tab</kbd> para voltar).
+        </div>
+        
+        <div class="example-section">
+            <h2 class="example-title">1. Indicador de Foco Removido ou Desativado</h2>
+            
+            <div class="problem-section">
+                <h3>Problema: Indicador de Foco Removido com CSS</h3>
+                <p>Muitos sites removem o outline padrão dos elementos focados, tornando impossível saber onde o usuário está durante a navegação por teclado.</p>
+                
+                <p>Experimente navegar por estes botões usando o teclado:</p>
+                <button class="button bad-button no-focus">Botão Sem Foco</button>
+                <button class="button bad-button no-focus">Outro Botão</button>
+                <button class="button bad-button no-focus">Mais Um Botão</button>
+                
+                <div class="code-example">
+                    /* CSS problemático - NUNCA faça isso */<br>
+                    .no-focus:focus {<br>
+                    &nbsp;&nbsp;outline: none;<br>
+                    }
+                </div>
+            </div>
+            
+            <div class="solution-section">
+                <h3>Solução: Manter ou Melhorar o Indicador de Foco</h3>
+                <p>O indicador de foco deve ser sempre visível e claro. Você pode personalizá-lo para combinar com o design do seu site, mas nunca removê-lo completamente.</p>
+                
+                <p>Experimente navegar por estes botões usando o teclado:</p>
+                <button class="button good-button">Botão Com Foco</button>
+                <button class="button good-button">Outro Botão</button>
+                <button class="button good-button">Mais Um Botão</button>
+                
+                <div class="code-example">
+                    /* CSS acessível - personalize mas mantenha visível */<br>
+                    .good-button:focus {<br>
+                    &nbsp;&nbsp;outline: 3px solid #80bdff;<br>
+                    &nbsp;&nbsp;outline-offset: 2px;<br>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="example-section">
+            <h2 class="example-title">2. Indicador de Foco com Baixo Contraste</h2>
+            
+            <div class="problem-section">
+                <h3>Problema: Indicador de Foco com Cores de Baixo Contraste</h3>
+                <p>Às vezes o indicador de foco existe, mas tem contraste insuficiente com o fundo, tornando-o difícil de ver.</p>
+                
+                <p>Experimente navegar por este botão usando o teclado:</p>
+                <button class="button bad-button" style="background-color: #6c757d; color: white; outline: 2px solid #aaa;">Botão com Foco de Baixo Contraste</button>
+                
+                <div class="code-example">
+                    /* CSS problemático - contraste insuficiente */<br>
+                    .bad-button:focus {<br>
+                    &nbsp;&nbsp;outline: 2px solid #aaaaaa; /* Cinza claro */<br>
+                    }
+                </div>
+            </div>
+            
+            <div class="solution-section">
+                <h3>Solução: Indicador de Foco com Alto Contraste</h3>
+                <p>O indicador de foco deve ter contraste suficiente com a cor de fundo para ser claramente visível.</p>
+                
+                <p>Experimente navegar por este botão usando o teclado:</p>
+                <button class="button good-button">Botão com Foco Visível</button>
+                
+                <div class="code-example">
+                    /* CSS acessível - alto contraste */<br>
+                    .good-button:focus {<br>
+                    &nbsp;&nbsp;outline: 3px solid #0069d9; /* Azul escuro */<br>
+                    &nbsp;&nbsp;outline-offset: 2px;<br>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="example-section">
+            <h2 class="example-title">3. Navegação em Menus</h2>
+            
+            <div class="problem-section">
+                <h3>Problema: Itens de Menu Sem Indicador de Foco</h3>
+                <p>Menus de navegação frequentemente não possuem indicadores de foco adequados, tornando difícil saber qual item está selecionado.</p>
+                
+                <p>Experimente navegar por este menu usando o teclado:</p>
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-item no-focus">Início</a></li>
+                    <li><a href="#" class="nav-item no-focus">Produtos</a></li>
+                    <li><a href="#" class="nav-item no-focus">Serviços</a></li>
+                    <li><a href="#" class="nav-item no-focus">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="solution-section">
+                <h3>Solução: Itens de Menu com Foco Visível</h3>
+                <p>Os itens de menu devem ter um indicador de foco claro e distinto.</p>
+                
+                <p>Experimente navegar por este menu usando o teclado:</p>
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-item">Início</a></li>
+                    <li><a href="#" class="nav-item">Produtos</a></li>
+                    <li><a href="#" class="nav-item">Serviços</a></li>
+                    <li><a href="#" class="nav-item">Contato</a></li>
+                </ul>
+                
+                <div class="code-example">
+                    /* CSS acessível para itens de menu */<br>
+                    .nav-item:focus {<br>
+                    &nbsp;&nbsp;background-color: #007bff;<br>
+                    &nbsp;&nbsp;outline: 2px solid #80bdff;<br>
+                    &nbsp;&nbsp;outline-offset: -2px;<br>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="example-section">
+            <h2 class="example-title">4. Componentes Complexos (Tabs)</h2>
+            
+            <div class="problem-section">
+                <h3>Problema: Tabs Sem Indicador de Foco Visível</h3>
+                <p>Componentes complexos como tabs frequentemente não possuem indicadores de foco adequados.</p>
+                
+                <p>Experimente navegar por estas tabs usando o teclado:</p>
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button no-focus">Informações</button>
+                        <button class="tab-button no-focus">Configurações</button>
+                        <button class="tab-button no-focus">Ajuda</button>
+                    </div>
+                    <div class="tab-content">
+                        Conteúdo da tab selecionada...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="solution-section">
+                <h3>Solução: Tabs com Foco Bem Definido</h3>
+                <p>Componentes complexos devem ter indicadores de foco claros e seguir padrões de navegação por teclado apropriados.</p>
+                
+                <p>Experimente navegar por estas tabs usando o teclado:</p>
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button">Informações</button>
+                        <button class="tab-button">Configurações</button>
+                        <button class="tab-button">Ajuda</button>
+                    </div>
+                    <div class="tab-content">
+                        Conteúdo da tab selecionada...
+                    </div>
+                </div>
+                
+                <div class="code-example">
+                    /* CSS acessível para tabs */<br>
+                    .tab-button:focus {<br>
+                    &nbsp;&nbsp;outline: 2px solid #007bff;<br>
+                    &nbsp;&nbsp;outline-offset: 2px;<br>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="example-section">
+            <h2 class="example-title">5. Personalização Criativa do Foco</h2>
+            
+            <div class="problem-section">
+                <h3>Problema: Personalização que Piora a Experiência</h3>
+                <p>Algumas personalizações do indicador de foco podem piorar a experiência em vez de melhorar.</p>
+                
+                <p>Experimente navegar por este botão usando o teclado:</p>
+                <button class="button bad-button" style="outline: 1px dotted #333; outline-offset: 0;">Botão com Foco Pouco Visível</button>
+            </div>
+            
+            <div class="solution-section">
+                <h3>Solução: Personalização que Melhora a Visibilidade</h3>
+                <p>Personalize o indicador de foco para torná-lo mais visível e compatível com a identidade visual do site.</p>
+                
+                <p>Experimente navegar por este botão usando o teclado:</p>
+                <button class="button custom-focus">Botão com Foco Personalizado</button>
+                
+                <div class="code-example">
+                    /* CSS para personalização acessível */<br>
+                    .custom-focus:focus {<br>
+                    &nbsp;&nbsp;outline: 2px solid #ff8c00;<br>
+                    &nbsp;&nbsp;outline-offset: 3px;<br>
+                    &nbsp;&nbsp;box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.3);<br>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Este exemplo demonstra problemas comuns de acessibilidade relacionados ao foco visível durante a navegação por teclado.</p>
+            <p>Lembre-se: usuários que navegam por teclado dependem do indicador de foco para saber onde estão na página.</p>
+        </footer>
+    </div>
+</body>
+</html>

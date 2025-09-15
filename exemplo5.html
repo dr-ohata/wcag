@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISO 9241 - Princípios de Usabilidade</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .intro {
+            padding: 30px;
+            text-align: center;
+            background: var(--light);
+        }
+        
+        .intro p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .tabs {
+            display: flex;
+            background: var(--dark);
+            overflow-x: auto;
+        }
+        
+        .tab-button {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        
+        .tab-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .tab-button.active {
+            background: var(--secondary);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .principle {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .principle h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .principle-icon {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .example {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .bad-example {
+            border-left: 4px solid var(--accent);
+        }
+        
+        .good-example {
+            border-left: 4px solid var(--success);
+        }
+        
+        .demo-area {
+            padding: 20px;
+            background: var(--light);
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 10px 15px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        .feedback {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            background: #d4edda;
+            color: #155724;
+            display: none;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        .error {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                width: 100%;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ISO 9241 - Usabilidade</h1>
+            <p>Princípios de Diálogo Humano-Computador e Design Centrado no Humano</p>
+        </header>
+        
+        <div class="intro">
+            <p>A ISO 9241 é um padrão internacional que estabelece diretrizes para a interação humano-computador e o design centrado no usuário. Esta página explora os princípios fundamentais das partes 110 e 210, com exemplos interativos.</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-button active" data-tab="consistency">Consistência</button>
+            <button class="tab-button" data-tab="feedback">Feedback</button>
+            <button class="tab-button" data-tab="language">Linguagem Compreensível</button>
+            <button class="tab-button" data-tab="control">Autocontrole</button>
+            <button class="tab-button" data-tab="error">Prevenção de Erros</button>
+            <button class="tab-button" data-tab="flexibility">Flexibilidade</button>
+        </div>
+        
+        <div class="tab-content active" id="consistency">
+            <div class="principle">
+                <h3><span class="principle-icon">🔄</span> Consistência</h3>
+                <p>Mantenha padrões consistentes em toda a interface para que os usuários possam transferir seu conhecimento entre diferentes partes do sistema.</p>
+                
+                <div class="example bad-example">
+                    <div class="example-title">Exemplo Problemático:</div>
+                    <p>Um site onde cada página tem um estilo de navegação diferente, botões com comportamentos inconsistentes e terminologia variada para a mesma ação.</p>
+                </div>
+                
+                <div class="example good-example">
+                    <div class="example-title">Exemplo Adequado:</div>
+                    <p>Interface com padrões consistentes de design, navegação previsível e terminologia uniforme em todo o sistema.</p>
+                </div>
+                
+                <div class="demo-area">
+                    <h4>Demonstração de Consistência</h4>
+                    <p>Experimente os controles abaixo para ver a consistência em ação:</p>
+                    
+                    <div class="controls">
+                        <button id="consistent-btn-1">Ação Primária</button>
+                        <button id="consistent-btn-2">Ação Secundária</button>
+                        <button id="consistent-btn-3">Cancelar</button>
+                    </div>
+                    
+                    <div class="feedback" id="consistency-feedback">
+                        Todos os botões seguem o mesmo padrão visual e de interação!
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="feedback">
+            <div class="principle">
+                <h3><span class="principle-icon">💬</span> Feedback</h3>
+                <p>Forneça feedback imediato e claro sobre as ações do usuário, mantendo-o informado sobre o estado do sistema.</p>
+                
+                <div class="example bad-example">
+                    <div class="example-title">Exemplo Problemático:</div>
+                    <p>Um formulário que não indica quando está processando dados ou não mostra confirmação após o envio, deixando o usuário em dúvida.</p>
+                </div>
+                
+                <div class="example good-example">
+                    <div class="example-title">Exemplo Adequado:</div>
+                    <p>Sistema que fornece feedback imediato para todas as ações do usuário, com indicadores de progresso e mensagens de confirmação.</p>
+                </div>
+                
+                <div class="demo-area">
+                    <h4>Demonstração de Feedback</h4>
+                    <p>Clique no botão abaixo para simular o envio de um formulário:</p>
+                    
+                    <button id="submit-btn">Enviar Formulário</button>
+                    
+                    <div class="feedback" id="loading-feedback">
+                        ⏳ Processando sua solicitação...
+                    </div>
+                    
+                    <div class="feedback" id="success-feedback">
+                        ✅ Formulário enviado com sucesso! Obrigado pelo envio.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="language">
+            <div class="principle">
+                <h3><span class="principle-icon">💬</span> Linguagem Compreensível</h3>
+                <p>Use linguagem clara e familiar para o usuário, evitando jargões técnicos desnecessários.</p>
+                
+                <div class="example bad-example">
+                    <div class="example-title">Exemplo Problemático:</div>
+                    <p>Mensagem de erro: "Exceção de ponteiro nulo na linha 284 do módulo de execução principal".</p>
+                </div>
+                
+                <div class="example good-example">
+                    <div class="example-title">Exemplo Adequado:</div>
+                    <p>Mensagem de erro: "Não foi possível salvar o arquivo. Verifique se há espaço disponível no disco."</p>
+                </div>
+                
+                <div class="demo-area">
+                    <h4>Demonstração de Linguagem Compreensível</h4>
+                    
+                    <div class="form-group">
+                        <label for="file-operation">Selecione uma operação:</label>
+                        <select id="file-operation">
+                            <option value="error">Simular erro</option>
+                            <option value="success">Simular sucesso</option>
+                        </select>
+                    </div>
+                    
+                    <button id="execute-btn">Executar Operação</button>
+                    
+                    <div class="feedback" id="tech-error">
+                        ❌ ERRO: IOException: Arquivo não encontrado em java.io.FileInputStream.open0(Native Method)
+                    </div>
+                    
+                    <div class="feedback" id="user-error">
+                        ❌ Não foi possível abrir o arquivo. Verifique se o arquivo existe e se você tem permissão para acessá-lo.
+                    </div>
+                    
+                    <div class="feedback" id="success-msg">
+                        ✅ Operação concluída com sucesso! O arquivo foi salvo.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="control">
+            <div class="principle">
+                <h3><span class="principle-icon">🎮</span> Autocontrole</h3>
+                <p>Permita que os usuários sintam que estão no controle do sistema, podendo desfazer ações e cancelar operações.</p>
+                
+                <div class="example bad-example">
+                    <div class="example-title">Exemplo Problemático:</div>
+                    <p>Um processo de exclusão que não pede confirmação e não permite recuperação dos dados excluídos.</p>
+                </div>
+                
+                <div class="example good-example">
+                    <div class="example-title">Exemplo Adequado:</div>
+                    <p>Sistema que pede confirmação para ações destrutivas e mantém uma lixeira para recuperação de arquivos.</p>
+                </div>
+                
+                <div class="demo-area">
+                    <h4>Demonstração de Autocontrole</h4>
+                    <p>Experimente excluir um item com e sem confirmação:</p>
+                    
+                    <div class="controls">
+                        <button id="delete-without-confirm">Excluir sem confirmação</button>
+                        <button id="delete-with-confirm">Excluir com confirmação</button>
+                    </div>
+                    
+                    <div class="feedback" id="deleted-feedback">
+                        Item excluído permanentemente.
+                    </div>
+                    
+                    <div class="feedback" id="confirm-dialog">
+                        <p>Tem certeza que deseja excluir este item?</p>
+                        <div class="controls">
+                            <button id="confirm-cancel">Cancelar</button>
+                            <button id="confirm-delete">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="error">
+            <div class="principle">
+                <h3><span class="principle-icon">⚠️</span> Prevenção de Erros</h3>
+                <p>Projete o sistema para prevenir erros sempre que possível e forneça boas mensagens de erro quando ocorrerem.</p>
+                
+                <div class="example bad-example">
+                    <div class="example-title">Exemplo Problemático:</div>
+                    <p>Um formulário que só valida os dados após o envio, mostrando uma longa lista de erros.</p>
+                </div>
+                
+                <div class="example good-example">
+                    <div class="example-title">Exemplo Adequado:</div>
+                    <p>Validação em tempo real que previne erros e fornece orientações claras durante o preenchimento.</p>
+                </div>
+                
+                <div class="demo-area">
+                    <h4>Demonstração de Prevenção de Erros</h4>
+                    
+                    <div class="form-group">
+                        <label for="email-input">E-mail:</label>
+                        <input type="text" id="email-input" placeholder="seu@email.com">
+                        <div class="error" id="email-error">Por favor, insira um endereço de e-mail válido.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password-input">Senha (mínimo 8 caracteres):</label>
+                        <input type="password" id="password-input">
+                        <div class="error" id="password-error">A senha deve ter pelo menos 8 caracteres.</div>
+                    </div>
+                    
+                    <button id="validate-btn">Validar</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="flexibility">
+            <div class="principle">
+                <h3><span class="principle-icon">🔧</span> Flexibilidade</h3>
+                <p>Ofereça diferentes formas de realizar tarefas, acomodando usuários com diferentes níveis de experiência.</p>
+                
+                <div class="example bad-example">
+                    <div class="example-title">Exemplo Problemático:</div>
+                    <p>Interface que força todos os usuários a seguir um único fluxo rigidamente definido para completar tarefas.</p>
+                </div>
+                
+                <div class="example good-example">
+                    <div class="example-title">Exemplo Adequado:</div>
+                    <p>Sistema que oferece atalhos de teclado para usuários experientes, além de interfaces guiadas para iniciantes.</p>
+                </div>
+                
+                <div class="demo-area">
+                    <h4>Demonstração de Flexibilidade</h4>
+                    <p>Experimente diferentes formas de executar a mesma ação:</p>
+                    
+                    <div class="controls">
+                        <button id="click-action">Ação por Clique</button>
+                        <button id="keyboard-btn">Mostrar Atalhos de Teclado</button>
+                    </div>
+                    
+                    <div class="feedback" id="shortcuts-info">
+                        <p>Atalhos disponíveis:</p>
+                        <ul>
+                            <li>Ctrl+S - Salvar</li>
+                            <li>Ctrl+Z - Desfazer</li>
+                            <li>Ctrl+Shift+A - Executar Ação</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feedback" id="action-feedback">
+                        Ação executada com sucesso!
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>ISO 9241 - Diretrizes para Design de Interfaces Centradas no Usuário</p>
+            <p>Parte 110: Princípios de Diálogo Humano-Computador | Parte 210: Design Centrado no Humano</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gerenciamento de abas
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    
+                    // Desativar todas as abas
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Ativar a aba clicada
+                    button.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Demonstração de Consistência
+            const consistentButtons = [
+                document.getElementById('consistent-btn-1'),
+                document.getElementById('consistent-btn-2'),
+                document.getElementById('consistent-btn-3')
+            ];
+            
+            consistentButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const feedback = document.getElementById('consistency-feedback');
+                    feedback.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        feedback.style.display = 'none';
+                    }, 3000);
+                });
+            });
+            
+            // Demonstração de Feedback
+            const submitBtn = document.getElementById('submit-btn');
+            const loadingFeedback = document.getElementById('loading-feedback');
+            const successFeedback = document.getElementById('success-feedback');
+            
+            submitBtn.addEventListener('click', () => {
+                loadingFeedback.style.display = 'block';
+                
+                setTimeout(() => {
+                    loadingFeedback.style.display = 'none';
+                    successFeedback.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        successFeedback.style.display = 'none';
+                    }, 3000);
+                }, 2000);
+            });
+            
+            // Demonstração de Linguagem Compreensível
+            const executeBtn = document.getElementById('execute-btn');
+            const fileOperation = document.getElementById('file-operation');
+            const techError = document.getElementById('tech-error');
+            const userError = document.getElementById('user-error');
+            const successMsg = document.getElementById('success-msg');
+            
+            executeBtn.addEventListener('click', () => {
+                techError.style.display = 'none';
+                userError.style.display = 'none';
+                successMsg.style.display = 'none';
+                
+                if (fileOperation.value === 'error') {
+                    // Mostrar ambos os tipos de erro para comparação
+                    techError.style.display = 'block';
+                    setTimeout(() => {
+                        techError.style.display = 'none';
+                        userError.style.display = 'block';
+                    }, 3000);
+                } else {
+                    successMsg.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 3000);
+                }
+            });
+            
+            // Demonstração de Autocontrole
+            const deleteWithoutConfirm = document.getElementById('delete-without-confirm');
+            const deleteWithConfirm = document.getElementById('delete-with-confirm');
+            const deletedFeedback = document.getElementById('deleted-feedback');
+            const confirmDialog = document.getElementById('confirm-dialog');
+            const confirmCancel = document.getElementById('confirm-cancel');
+            const confirmDelete = document.getElementById('confirm-delete');
+            
+            deleteWithoutConfirm.addEventListener('click', () => {
+                deletedFeedback.style.display = 'block';
+                confirmDialog.style.display = 'none';
+                
+                setTimeout(() => {
+                    deletedFeedback.style.display = 'none';
+                }, 3000);
+            });
+            
+            deleteWithConfirm.addEventListener('click', () => {
+                confirmDialog.style.display = 'block';
+                deletedFeedback.style.display = 'none';
+            });
+            
+            confirmCancel.addEventListener('click', () => {
+                confirmDialog.style.display = 'none';
+            });
+            
+            confirmDelete.addEventListener('click', () => {
+                confirmDialog.style.display = 'none';
+                deletedFeedback.style.display = 'block';
+                
+                setTimeout(() => {
+                    deletedFeedback.style.display = 'none';
+                }, 3000);
+            });
+            
+            // Demonstração de Prevenção de Erros
+            const emailInput = document.getElementById('email-input');
+            const passwordInput = document.getElementById('password-input');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+            const validateBtn = document.getElementById('validate-btn');
+            
+            // Validação em tempo real
+            emailInput.addEventListener('input', () => {
+                validateEmail();
+            });
+            
+            passwordInput.addEventListener('input', () => {
+                validatePassword();
+            });
+            
+            validateBtn.addEventListener('click', () => {
+                const isEmailValid = validateEmail();
+                const isPasswordValid = validatePassword();
+                
+                if (isEmailValid && isPasswordValid) {
+                    alert('Formulário válido! Poderia ser enviado.');
+                }
+            });
+            
+            function validateEmail() {
+                const email = emailInput.value;
+                const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+                
+                emailError.style.display = isValid ? 'none' : 'block';
+                emailInput.style.borderColor = isValid ? '#ced4da' : '#e74c3c';
+                
+                return isValid;
+            }
+            
+            function validatePassword() {
+                const password = passwordInput.value;
+                const isValid = password.length >= 8;
+                
+                passwordError.style.display = isValid ? 'none' : 'block';
+                passwordInput.style.borderColor = isValid ? '#ced4da' : '#e74c3c';
+                
+                return isValid;
+            }
+            
+            // Demonstração de Flexibilidade
+            const clickAction = document.getElementById('click-action');
+            const keyboardBtn = document.getElementById('keyboard-btn');
+            const shortcutsInfo = document.getElementById('shortcuts-info');
+            const actionFeedback = document.getElementById('action-feedback');
+            
+            clickAction.addEventListener('click', () => {
+                actionFeedback.style.display = 'block';
+                
+                setTimeout(() => {
+                    actionFeedback.style.display = 'none';
+                }, 3000);
+            });
+            
+            keyboardBtn.addEventListener('click', () => {
+                shortcutsInfo.style.display = shortcutsInfo.style.display === 'block' ? 'none' : 'block';
+            });
+            
+            // Adicionar suporte a atalhos de teclado
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey) {
+                    switch(e.key) {
+                        case 's':
+                            e.preventDefault();
+                            alert('Documento salvo! (Simulação)');
+                            break;
+                        case 'z':
+                            e.preventDefault();
+                            alert('Última ação desfeita! (Simulação)');
+                            break;
+                        case 'a':
+                            if (e.shiftKey) {
+                                e.preventDefault();
+                                actionFeedback.style.display = 'block';
+                                
+                                setTimeout(() => {
+                                    actionFeedback.style.display = 'none';
+                                }, 3000);
+                            }
+                            break;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site com Problemas de Texto Alternativo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .intro {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .image-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+        
+        .image-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-info {
+            padding: 15px;
+        }
+        
+        .image-info h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .problem {
+            background-color: #ffe6e6;
+            padding: 15px;
+            border-left: 5px solid #ff5252;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .solution {
+            background-color: #e6ffe6;
+            padding: 15px;
+            border-left: 5px solid #4caf50;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .code-example {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Consolas', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Problemas Comuns com Texto Alternativo em Imagens</h1>
+            <p class="intro">Esta página demonstra exemplos reais de como textos alternativos inadequados podem criar barreiras de acessibilidade.</p>
+        </header>
+        
+        <div class="gallery">
+            <div class="image-card">
+                <img src="https://placehold.co/600x400/ff5252/white?text=Imagem+1" alt="imagem">
+                <div class="image-info">
+                    <h3>Texto Alternativo: "imagem"</h3>
+                    <div class="problem">
+                        <strong>Problema:</strong> Texto alternativo vago e genérico que não transmite nenhuma informação útil.
+                    </div>
+                    <div class="solution">
+                        <strong>Solução:</strong> Descrever o conteúdo e função da imagem de forma específica.
+                    </div>
+                    <div class="code-example">
+                        &lt;img src="grafico.png" alt="<span style="color:#ff5252;">imagem</span>"&gt;<br>
+                        &lt;img src="grafico.png" alt="<span style="color:#4caf50;">Gráfico de barras mostrando o crescimento de vendas no último trimestre</span>"&gt;
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-card">
+                <img src="https://placehold.co/600x400/2196f3/white?text=Imagem+2" alt="Foto de um cachorro">
+                <div class="image-info">
+                    <h3>Texto Alternativo: "Foto de um cachorro"</h3>
+                    <div class="problem">
+                        <strong>Problema:</strong> Descrição muito genérica que não transmite o contexto ou detalhes importantes.
+                    </div>
+                    <div class="solution">
+                        <strong>Solução:</strong> Incluir detalhes relevantes como raça, ação e contexto.
+                    </div>
+                    <div class="code-example">
+                        &lt;img src="cachorro.jpg" alt="<span style="color:#ff5252;">Foto de um cachorro</span>"&gt;<br>
+                        &lt;img src="cachorro.jpg" alt="<span style="color:#4caf50;">Golden Retriever brincando com uma bola no parque</span>"&gt;
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-card">
+                <img src="https://placehold.co/600x400/4caf50/white?text=Imagem+3" alt="Produto em promoção, compre agora, oferta por tempo limitado, não perca esta oportunidade">
+                <div class="image-info">
+                    <h3>Texto Alternativo Excessivo</h3>
+                    <div class="problem">
+                        <strong>Problema:</strong> Texto alternativo muito longo com informações irrelevantes ou de marketing.
+                    </div>
+                    <div class="solution">
+                        <strong>Solução:</strong> Manter a descrição concisa e focada no conteúdo visual.
+                    </div>
+                    <div class="code-example">
+                        &lt;img src="produto.jpg" alt="<span style="color:#ff5252;">Produto em promoção, compre agora, oferta por tempo limitado...</span>"&gt;<br>
+                        &lt;img src="produto.jpg" alt="<span style="color:#4caf50;">Smartphone XYZ na cor preta com capa protetora</span>"&gt;
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-card">
+                <img src="https://placehold.co/600x400/ff9800/white?text=Imagem+4" alt="">
+                <div class="image-info">
+                    <h3>Texto Alternativo Vazio em Imagem Informativa</h3>
+                    <div class="problem">
+                        <strong>Problema:</strong> Atributo alt vazio em imagem que transmite informação importante.
+                    </div>
+                    <div class="solution">
+                        <strong>Solução:</strong> Fornecer texto alternativo descritivo para imagens informativas.
+                    </div>
+                    <div class="code-example">
+                        &lt;img src="fluxograma.png" alt="<span style="color:#ff5252;"></span>"&gt;<br>
+                        &lt;img src="fluxograma.png" alt="<span style="color:#4caf50;">Fluxograma do processo de aprovação de pedidos</span>"&gt;
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-card">
+                <img src="https://placehold.co/600x400/9c27b0/white?text=Imagem+5" alt="seta">
+                <div class="image-info">
+                    <h3>Texto Alternativo Descrevendo Aparência</h3>
+                    <div class="problem">
+                        <strong>Problema:</strong> Descrever a aparência da imagem em vez de sua função ou conteúdo.
+                    </div>
+                    <div class="solution">
+                        <strong>Solução:</strong> Descrever a função do elemento, especialmente para botões e links.
+                    </div>
+                    <div class="code-example">
+                        &lt;img src="seta.png" alt="<span style="color:#ff5252;">Seta azul apontando para a direita</span>"&gt;<br>
+                        &lt;img src="seta.png" alt="<span style="color:#4caf50;">Próxima página</span>"&gt;
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-card">
+                <img src="https://placehold.co/600x400/00bcd4/white?text=Imagem+6" alt="imagem123.jpg">
+                <div class="image-info">
+                    <h3>Nome de Arquivo como Texto Alternativo</h3>
+                    <div class="problem">
+                        <strong>Problema:</strong> Usar o nome do arquivo como texto alternativo, o que não tem significado para o usuário.
+                    </div>
+                    <div class="solution">
+                        <strong>Solução:</strong> Sempre fornecer uma descrição significativa do conteúdo da imagem.
+                    </div>
+                    <div class="code-example">
+                        &lt;img src="grafico_vendas_2023.png" alt="<span style="color:#ff5252;">grafico_vendas_2023.png</span>"&gt;<br>
+                        &lt;img src="grafico_vendas_2023.png" alt="<span style="color:#4caf50;">Gráfico de linhas mostrando o crescimento de vendas em 2023</span>"&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Este exemplo demonstra problemas comuns de acessibilidade em textos alternativos para imagens.</p>
+            <p>Lembre-se: o texto alternativo deve transmitir o mesmo conteúdo e função da imagem para usuários que não podem vê-la.</p>
+        </footer>
+    </div>
+</body>
+</html>
